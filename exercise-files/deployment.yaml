@@ -1,13 +1,13 @@
 --- 
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # object kind
 metadata:
-  name: pod-info-deployment
-  namespace: development
+  name: pod-info-deployment # name of the deployment
+  namespace: development # namesspaces deployed from namespace.yaml
   labels:
     app: pod-info
 spec:
-  replicas: 3
+  replicas: 3 # high avilability
   selector:
     matchLabels:
       app: pod-info
@@ -20,8 +20,8 @@ spec:
       - name: pod-info-container
         image: kimschles/pod-info-app:latest
         ports:
-        - containerPort: 3000
-        env:
+        - containerPort: 3000 # direct traffic to this port
+        env: # 3 environment variables
           - name: POD_NAME
             valueFrom:
               fieldRef:
@@ -34,3 +34,11 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.podIP
+
+# verify with:
+# kubectl get deployments -n development
+# kubectl get pods -n development
+# kubectl describe deployment pod-info-deployment -n development
+# kubectl describe pod <pod-name> -n development
+# kubectl logs <pod-name> -n development
+# curl <pod-ip>:3000

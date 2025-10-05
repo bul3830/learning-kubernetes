@@ -29,3 +29,18 @@ spec:
           limits:
             cpu: 100m
             memory: 128Mi
+
+# verify with:
+# kubectl get deployments -n default
+# kubectl get pods -n defaultm -or- deployment # when -n is not specified, it defaults to 'default' namespace
+# kubectl get pods -n default -o wide # to see node assignment and pod IP
+# kubectl describe deployment busybox -n default # describe deployment
+# kubectl describe pod <pod-name> -n default # describe pod
+# kubectl logs <pod-name> -n default # check logs
+# kubectl describe deployment
+
+# Execute commands inside the BusyBox pod
+# alias k=kubectl
+# k exec -it busybox-8578bccf7-75svv -- /bin/sh # exec into the pod think of it as ssh
+# k exec -it busybox-8578bccf7-75svv -- /bin/sh -c "echo Hello from the BusyBox pod" # exec into the pod and run a command
+# k exec -it busybox-8578bccf7-75svv -- /bin/sh -c "ls -la /"

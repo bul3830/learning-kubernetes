@@ -19,6 +19,15 @@ spec:
       containers:
       - name: pod-info-container
         image: kimschles/pod-info-app:latest
+        resources:
+          requests:
+            # do not schedule this pod if less than this available
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            # do not allow this pod to use more than this
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - containerPort: 3000 # direct traffic to this port
         env: # 3 environment variables

@@ -8,6 +8,13 @@ spec:
   selector:
     app: pod-info
   ports:
-    - port: 80
-      targetPort: 3000
+    - port: 80 # the port that the service will expose
+      targetPort: 3000 # the port on the pod that the service should forward traffic to
   type: LoadBalancer
+
+
+# Verify the service is created
+# kubectl get svc -n development
+# kubectl describe svc demo-service -n development
+# kubectl get endpoints demo-service -n development
+# curl <EXTERNAL-IP>
